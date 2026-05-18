@@ -20,18 +20,33 @@ const triggerDownload = (blob, filename) => {
   URL.revokeObjectURL(url);
 };
 
-// Privacy: report timestamps are always rendered in UTC so the user's local
-// time zone / locale never leaks into the generated PDF or JSON output.
+// Privacy: report timestamps are rendered in the official Brazilian time
+// (America/Sao_Paulo, UTC-3) so users see the local Brasília time on every
+// generated report. No location/timezone is leaked: the offset is fixed at
+// -03:00 instead of being derived from the user's device locale.
+const BRASILIA_OFFSET_MINUTES = -180; // UTC-3
+
 const nowStamp = () => {
   const d = new Date();
+  // Shift current time into Brasília local time (UTC-3).
+  const brt = new Date(d.getTime() + BRASILIA_OFFSET_MINUTES * 60 * 1000);
   const pad = (n) => String(n).padStart(2, "0");
-  return `${pad(d.getUTCDate())}/${pad(d.getUTCMonth() + 1)}/${d.getUTCFullYear()} ${pad(d.getUTCHours())}:${pad(d.getUTCMinutes())}:${pad(d.getUTCSeconds())} UTC`;
+  return `${pad(brt.getUTCDate())}/${pad(brt.getUTCMonth() + 1)}/${brt.getUTCFullYear()} ${pad(brt.getUTCHours())}:${pad(brt.getUTCMinutes())}:${pad(brt.getUTCSeconds())} (UTC-3 Brasília)`;
 };
 
 const fileStamp = () => {
   const d = new Date();
+  const brt = new Date(d.getTime() + BRASILIA_OFFSET_MINUTES * 60 * 1000);
   const pad = (n) => String(n).padStart(2, "0");
-  return `${d.getUTCFullYear()}${pad(d.getUTCMonth() + 1)}${pad(d.getUTCDate())}_${pad(d.getUTCHours())}${pad(d.getUTCMinutes())}${pad(d.getUTCSeconds())}`;
+  return `${brt.getUTCFullYear()}${pad(brt.getUTCMonth() + 1)}${pad(brt.getUTCDate())}_${pad(brt.getUTCHours())}${pad(brt.getUTCMinutes())}${pad(brt.getUTCSeconds())}`;
+};
+
+// ISO-8601 timestamp anchored to Brasília (UTC-3) for JSON reports.
+const isoStampBR = () => {
+  const d = new Date();
+  const brt = new Date(d.getTime() + BRASILIA_OFFSET_MINUTES * 60 * 1000);
+  const pad = (n) => String(n).padStart(2, "0");
+  return `${brt.getUTCFullYear()}-${pad(brt.getUTCMonth() + 1)}-${pad(brt.getUTCDate())}T${pad(brt.getUTCHours())}:${pad(brt.getUTCMinutes())}:${pad(brt.getUTCSeconds())}-03:00`;
 };
 
 // ============================================================
@@ -88,7 +103,7 @@ const drawWatermark = (doc) => {
   const y = (H - size) / 2;
 
   try {
-    const gs = new doc.GState({ opacity: 0.04 });
+    const gs = new doc.GState({ opacity: 0.2 });
     doc.setGState(gs);
   } catch (_) { /* GState may fail in some envs; fallback to faint color */ }
 
@@ -196,13 +211,7 @@ function writeBrand(ctx) {
   doc.setFontSize(10);
   doc.setTextColor(0, 47, 167);
   doc.text(ctx.subtitle, margin, ctx.y);
-  ctx.y += 8;
-
-  // Accent rule
-  doc.setDrawColor(0, 47, 167);
-  doc.setLineWidth(1.2);
-  doc.line(margin, ctx.y, margin + 60, ctx.y);
-  ctx.y += 6;
+  ctx.y += 14;
 
   // Light divider
   doc.setDrawColor(229, 231, 235);
@@ -480,7 +489,7 @@ export const downloadJsonReport = (report) => {
   const minimal = {
     application: "Meta Extrator",
     operacao: "extracao",
-    gerado_em: new Date().toISOString(),
+    gerado_em: isoStampBR(),
     arquivo: report?.file?.fileName,
     hashes: report?.hashes,
     metadados: report?.metadata,
@@ -531,7 +540,7 @@ export const downloadStripJsonReport = (originalReport, newReport) => {
   const minimal = {
     application: "Meta Extrator",
     operacao: "eliminacao",
-    gerado_em: new Date().toISOString(),
+    gerado_em: isoStampBR(),
     status: "sucesso",
     mensagem: "Todos os metadados foram eliminados com sucesso.",
     arquivo_original: originalReport?.file?.fileName,
@@ -586,7 +595,7 @@ export const downloadEditJsonReport = (originalReport, newReport, mode = "compar
   const minimal = {
     application: "Meta Extrator",
     operacao: "edicao",
-    gerado_em: new Date().toISOString(),
+    gerado_em: isoStampBR(),
     modo: mode === "comparison" ? "comparativo" : "apenas_editado",
     arquivo_original: originalReport?.file?.fileName,
     arquivo_editado: newReport?.file?.fileName,
@@ -661,7 +670,7 @@ export const downloadSignatureJson = (result) => {
   const data = {
     application: "Meta Extrator",
     operacao: "assinatura_hash",
-    gerado_em: new Date().toISOString(),
+    gerado_em: isoStampBR(),
     arquivo: result.fileName,
     tipo_mime: result.mimeType,
     tamanho_bytes: result.fileSize,
@@ -703,7 +712,7 @@ export const downloadComparisonJson = (result) => {
   const data = {
     application: "Meta Extrator",
     operacao: "comparacao_hash",
-    gerado_em: new Date().toISOString(),
+    gerado_em: isoStampBR(),
     modo: result.mode === "file-file" ? "arquivo_x_arquivo" : "arquivo_x_hash",
     veredito: result.verdict,
     ...(result.mode === "file-file"

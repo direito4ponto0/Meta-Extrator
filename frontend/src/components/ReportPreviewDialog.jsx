@@ -102,15 +102,28 @@ export default function ReportPreviewDialog({ open, onOpenChange, builder, title
           </div>
         </header>
 
-        {/* Iframe */}
+        {/* PDF embed */}
         <div className="relative flex-1 bg-[var(--ma-bg-secondary)]">
           {url ? (
-            <iframe
+            <object
               data-testid="report-preview-iframe"
-              src={url}
-              title={title}
+              data={url}
+              type="application/pdf"
               className="absolute inset-0 h-full w-full border-0 bg-white"
-            />
+              aria-label={title}
+            >
+              <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 px-6 text-center text-sm text-[var(--ma-text-secondary)]">
+                <p>Seu navegador não suporta pré-visualização inline de PDF.</p>
+                <a
+                  href={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="border border-[var(--ma-border)] bg-white px-4 py-2 text-xs font-bold uppercase tracking-widest text-[var(--ma-text)] hover:border-[var(--ma-text)]"
+                >
+                  Abrir em nova aba
+                </a>
+              </div>
+            </object>
           ) : (
             <div className="absolute inset-0 flex items-center justify-center text-xs text-[var(--ma-text-secondary)]">
               Gerando relatório…

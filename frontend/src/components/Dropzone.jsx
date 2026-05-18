@@ -46,14 +46,13 @@ export default function Dropzone({ onFile, disabled }) {
       />
 
       <div className="relative flex h-full flex-col items-center justify-center gap-6 px-6 py-16 text-center">
-        <div className="group relative flex h-20 w-20 items-center justify-center border border-[var(--ma-border)] bg-white transition-all duration-300 group-hover:border-[var(--ma-accent)]">
-          <div className="absolute inset-0 bg-[var(--ma-accent)] opacity-0 transition-opacity duration-500 group-hover:opacity-5" aria-hidden="true" />
-          <UploadSimple size={36} weight="thin" className="relative text-[var(--ma-text)] transition-transform duration-300 group-hover:-translate-y-1 group-hover:text-[var(--ma-accent)]" aria-hidden="true" />
+        <div className="relative flex h-20 w-20 items-center justify-center border border-[var(--ma-border)] bg-white transition-colors duration-300 hover:border-[var(--ma-text)]">
+          <UploadSimple size={36} weight="thin" className="relative text-[var(--ma-text)]" aria-hidden="true" />
         </div>
 
         <div className="space-y-3">
           <h2 className="font-display text-3xl font-semibold tracking-tight text-[var(--ma-text)] sm:text-4xl lg:text-5xl">
-            Arraste qualquer arquivo aqui
+            ARRASTE E SOLTE SEU ARQUIVO AQUI
           </h2>
           <p className="mx-auto max-w-xl text-sm leading-relaxed text-[var(--ma-text-secondary)] sm:text-base">
             ou clique para selecionar. <span className="font-semibold text-[var(--ma-text)]">Qualquer formato</span> é aceito (até 10 GB).

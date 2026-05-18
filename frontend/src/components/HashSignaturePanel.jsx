@@ -125,7 +125,7 @@ export default function HashSignaturePanel() {
             variant="minimal"
             onClick={handleSign}
             disabled={running || !file}
-            className="w-full py-6 text-sm font-bold uppercase tracking-widest disabled:opacity-50"
+            className="w-full py-6 text-sm font-bold uppercase tracking-widest text-[var(--ma-text)] disabled:opacity-100 disabled:text-[var(--ma-text)] disabled:cursor-not-allowed"
           >
             {running ? "Calculando…" : "Gerar Assinatura"}
           </Button>

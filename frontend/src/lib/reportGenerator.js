@@ -76,20 +76,24 @@ const drawLogo = (doc, x, y, size = 28, color = [10, 10, 10], opts = {}) => {
 
 const drawWatermark = (doc) => {
   // The magnifying glass and the letter "M" are both drawn as outlined
-  // strokes (no filled glyph) with the same thin line width, so they appear
-  // with comparable opacity behind the report content.
+  // strokes (no filled glyph) with very thin line width and very low
+  // opacity, so the watermark stays subtle and never competes with the
+  // report content for legibility.
   const W = doc.internal.pageSize.getWidth();
   const H = doc.internal.pageSize.getHeight();
-  const size = Math.min(W, H) * 0.4;
+  // Larger size = strokes spread further apart, so the mark reads as a
+  // diffuse background rather than a concentrated symbol.
+  const size = Math.min(W, H) * 0.6;
   const x = (W - size) / 2;
   const y = (H - size) / 2;
 
   try {
-    const gs = new doc.GState({ opacity: 0.08 });
+    const gs = new doc.GState({ opacity: 0.04 });
     doc.setGState(gs);
   } catch (_) { /* GState may fail in some envs; fallback to faint color */ }
 
-  drawLogo(doc, x, y, size, [150, 150, 150], { strokeScale: 0.18, mRenderMode: "stroke" });
+  // Lighter gray + thinner strokes => watermark stays in the background.
+  drawLogo(doc, x, y, size, [180, 180, 180], { strokeScale: 0.1, mRenderMode: "stroke" });
 
   try {
     const gs = new doc.GState({ opacity: 1 });

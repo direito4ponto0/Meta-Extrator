@@ -1,8 +1,7 @@
 import { useState } from "react";
-import { toast } from "sonner";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
-import { DownloadSimple, FileText, Database, ArrowsClockwise, ShareNetwork } from "@phosphor-icons/react";
+import { DownloadSimple, FileText, Database, ArrowsClockwise } from "@phosphor-icons/react";
 import HashesPanel from "./HashesPanel";
 import LocationMap from "./LocationMap";
 import ManipulationPanel from "./ManipulationPanel";
@@ -45,32 +44,6 @@ export default function Results({ report, onReset, rawFile }) {
   const { file, hashes, category, metadata } = report;
   const gps = metadata?.gps;
   const [previewOpen, setPreviewOpen] = useState(false);
-
-  // Privacy-preserving share: copies a compact, plain-text summary of the
-  // report to the clipboard so the user can paste it directly into WhatsApp,
-  // e-mail or any chat without uploading anything anywhere.
-  const handleShare = async () => {
-    try {
-      const lines = [
-        "META EXTRATOR — Resumo do Relatório",
-        "https://metaextrator.com.br",
-        "",
-        `Arquivo:  ${file.fileName}`,
-        `Tamanho:  ${formatBytes(file.fileSize)}`,
-        `MIME:     ${file.mimeType}`,
-        `Tipo:     ${getCategoryLabel(category)}`,
-        "",
-        "— Hashes —",
-        ...Object.entries(hashes || {}).map(([alg, val]) => `${alg.toUpperCase().padEnd(8)} ${val}`),
-        "",
-        "Gerado 100% no navegador. Nenhum dado enviado a servidores.",
-      ];
-      await navigator.clipboard.writeText(lines.join("\n"));
-      toast.success("Resumo do relatório copiado para a área de transferência.");
-    } catch {
-      toast.error("Não foi possível copiar o resumo. Copie manualmente.");
-    }
-  };
 
   // Group metadata for tabs
   const categorizedTabs = [];
@@ -143,14 +116,6 @@ export default function Results({ report, onReset, rawFile }) {
           >
             <Database size={16} weight="bold" className="mr-2" aria-hidden="true" />
             Baixar JSON
-          </Button>
-          <Button
-            data-testid="share-report-btn"
-            variant="minimal"
-            onClick={handleShare}
-          >
-            <ShareNetwork size={16} weight="bold" className="mr-2" aria-hidden="true" />
-            Compartilhar resumo
           </Button>
           <Button
             data-testid="reset-btn"

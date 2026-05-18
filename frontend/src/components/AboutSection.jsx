@@ -40,21 +40,21 @@ export default function AboutSection() {
             emitido. Você também pode usar os módulos independentes de{" "}
             <span className="font-semibold">Assinatura Hash</span> e{" "}
             <span className="font-semibold">Comparação Hash</span> para validar a integridade de
-            qualquer arquivo.{" "}
-            <span>
-              Esta é uma aplicação de código-fonte aberto. Seu código e todas as ferramentas
-              utilizadas estão disponibilizadas no GitHub.{" "}
-              <a
-                href={GITHUB_REPO_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                data-testid="about-github-link"
-                className="font-semibold text-[var(--ma-text)] underline decoration-[var(--ma-text)]/40 underline-offset-2 transition-colors hover:decoration-[var(--ma-text)]"
-              >
-                Clique aqui para acessar
-              </a>
-              .
-            </span>
+            qualquer arquivo.
+          </p>
+          <p>
+            Esta é uma aplicação de código-fonte aberto. Seu código e todas as ferramentas
+            utilizadas estão disponibilizadas no GitHub.{" "}
+            <a
+              href={GITHUB_REPO_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-testid="about-github-link"
+              className="font-semibold text-[var(--ma-text)] underline decoration-[var(--ma-text)]/40 underline-offset-2 transition-colors hover:decoration-[var(--ma-text)]"
+            >
+              Clique aqui para acessar
+            </a>
+            .
           </p>
         </div>
       </div>

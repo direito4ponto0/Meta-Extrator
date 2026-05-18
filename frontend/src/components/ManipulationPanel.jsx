@@ -149,7 +149,7 @@ export default function ManipulationPanel({ file, originalReport }) {
             {/* Strip */}
             <div className="flex flex-col gap-3 border border-[var(--ma-border)] p-5">
               <div className="flex items-center gap-3">
-                <Eraser size={22} weight="bold" className="text-[var(--ma-accent)]" aria-hidden="true" />
+                <Eraser size={22} weight="bold" className="text-[var(--ma-text)]" aria-hidden="true" />
                 <div className="font-display text-base font-semibold tracking-tight">Eliminar metadados</div>
               </div>
               <p className="text-sm leading-relaxed text-[var(--ma-text-secondary)]">
@@ -170,7 +170,7 @@ export default function ManipulationPanel({ file, originalReport }) {
             {/* Edit */}
             <div className="flex flex-col gap-3 border border-[var(--ma-border)] p-5">
               <div className="flex items-center gap-3">
-                <PencilSimple size={22} weight="bold" className="text-[var(--ma-accent)]" aria-hidden="true" />
+                <PencilSimple size={22} weight="bold" className="text-[var(--ma-text)]" aria-hidden="true" />
                 <div className="font-display text-base font-semibold tracking-tight">Editar metadados</div>
               </div>
               <p className="text-sm leading-relaxed text-[var(--ma-text-secondary)]">
@@ -328,7 +328,7 @@ export default function ManipulationPanel({ file, originalReport }) {
                   <div className="grid gap-3 sm:grid-cols-2">
                     <div className="space-y-2 border border-[var(--ma-border)] p-4">
                       <div className="flex items-center gap-2">
-                        <GitDiff size={18} weight="bold" className="text-[var(--ma-accent)]" aria-hidden="true" />
+                        <GitDiff size={18} weight="bold" className="text-[var(--ma-text)]" aria-hidden="true" />
                         <div className="text-sm font-semibold">Comparativo</div>
                       </div>
                       <p className="text-xs leading-relaxed text-[var(--ma-text-secondary)]">
@@ -354,7 +354,7 @@ export default function ManipulationPanel({ file, originalReport }) {
 
                     <div className="space-y-2 border border-[var(--ma-border)] p-4">
                       <div className="flex items-center gap-2">
-                        <FileArrowDown size={18} weight="bold" className="text-[var(--ma-accent)]" aria-hidden="true" />
+                        <FileArrowDown size={18} weight="bold" className="text-[var(--ma-text)]" aria-hidden="true" />
                         <div className="text-sm font-semibold">Apenas editado</div>
                       </div>
                       <p className="text-xs leading-relaxed text-[var(--ma-text-secondary)]">

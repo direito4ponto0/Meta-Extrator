@@ -121,7 +121,7 @@ export default function HashComparisonPanel() {
     <div data-testid="comparison-module" className="space-y-8">
       <section className="border border-[var(--ma-border)] bg-white">
         <header className="flex items-center gap-3 border-b border-[var(--ma-border)] bg-[var(--ma-bg-secondary)] px-6 py-4">
-          <ArrowsLeftRight size={20} weight="bold" className="text-[var(--ma-accent)]" />
+          <ArrowsLeftRight size={20} weight="bold" className="text-[var(--ma-text)]" />
           <div>
             <h2 className="font-display text-lg font-semibold tracking-tight">Comparação Hash</h2>
             <p className="text-xs text-[var(--ma-text-secondary)]">
@@ -177,7 +177,7 @@ export default function HashComparisonPanel() {
               </div>
               <div className="border-2 border-dashed border-[var(--ma-border)] p-6 hover:border-[var(--ma-text)] transition-all">
                 <div className="flex flex-col items-center gap-4">
-                  <div className="flex h-16 w-16 items-center justify-center border-2 border-[var(--ma-border)] bg-white text-[var(--ma-accent)]">
+                  <div className="flex h-16 w-16 items-center justify-center border-2 border-[var(--ma-border)] bg-white text-[var(--ma-text)]">
                     <ArrowsLeftRight size={28} weight="bold" />
                   </div>
                   
@@ -220,7 +220,7 @@ export default function HashComparisonPanel() {
                         Arquivo 1
                       </div>
                       <div className="flex items-center gap-3">
-                        <div className="flex h-10 w-10 shrink-0 items-center justify-center border border-[var(--ma-border)] bg-white text-[var(--ma-accent)]">
+                        <div className="flex h-10 w-10 shrink-0 items-center justify-center border border-[var(--ma-border)] bg-white text-[var(--ma-text)]">
                           <CheckCircle size={18} weight="fill" />
                         </div>
                         <div className="min-w-0 flex-1">
@@ -241,7 +241,7 @@ export default function HashComparisonPanel() {
                         Arquivo 2
                       </div>
                       <div className="flex items-center gap-3">
-                        <div className="flex h-10 w-10 shrink-0 items-center justify-center border border-[var(--ma-border)] bg-white text-[var(--ma-accent)]">
+                        <div className="flex h-10 w-10 shrink-0 items-center justify-center border border-[var(--ma-border)] bg-white text-[var(--ma-text)]">
                           <CheckCircle size={18} weight="fill" />
                         </div>
                         <div className="min-w-0 flex-1">

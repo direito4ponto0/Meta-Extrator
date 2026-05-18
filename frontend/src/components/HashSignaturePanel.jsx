@@ -68,7 +68,7 @@ export default function HashSignaturePanel() {
     <div data-testid="signature-module" className="space-y-8">
       <section className="border border-[var(--ma-border)] bg-white">
         <header className="flex items-center gap-3 border-b border-[var(--ma-border)] bg-[var(--ma-bg-secondary)] px-6 py-4">
-          <Fingerprint size={20} weight="bold" className="text-[var(--ma-accent)]" aria-hidden="true" />
+          <Fingerprint size={20} weight="bold" className="text-[var(--ma-text)]" aria-hidden="true" />
           <div>
             <h2 className="font-display text-lg font-semibold tracking-tight">Assinatura Hash</h2>
             <p className="text-xs text-[var(--ma-text-secondary)]">

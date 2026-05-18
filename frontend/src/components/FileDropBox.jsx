@@ -57,7 +57,7 @@ export default function FileDropBox({
 
       <div className={`flex flex-col gap-3 ${isCompact ? "" : "sm:flex-row sm:items-center sm:justify-between"}`}>
         <div className="flex min-w-0 flex-1 items-center gap-3">
-          <div className="flex h-10 w-10 shrink-0 items-center justify-center border border-[var(--ma-border)] bg-white text-[var(--ma-accent)]">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center border border-[var(--ma-border)] bg-white text-[var(--ma-text)]">
             <UploadSimple size={16} weight="bold" />
           </div>
           <div className="min-w-0 flex-1">

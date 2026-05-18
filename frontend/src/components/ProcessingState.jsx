@@ -18,7 +18,7 @@ export default function ProcessingState({ file, phase, progress }) {
       <div className="ma-scan-line" aria-hidden="true" />
       <div className="flex flex-col items-center justify-center gap-8 text-center">
         <div className="flex h-20 w-20 items-center justify-center border border-[var(--ma-border)]">
-          <CircleNotch size={36} weight="bold" className="animate-spin text-[var(--ma-accent)]" aria-hidden="true" />
+          <CircleNotch size={36} weight="bold" className="animate-spin text-[var(--ma-text)]" aria-hidden="true" />
         </div>
 
         <div className="space-y-2">

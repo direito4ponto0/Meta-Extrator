@@ -45,7 +45,7 @@ export default function CookieBanner() {
       <div className="mx-auto max-w-3xl border border-[var(--ma-border)] bg-white shadow-[0_8px_30px_rgb(0,0,0,0.08)]">
         <div className="flex flex-col gap-4 p-5 sm:flex-row sm:items-start sm:gap-5 sm:p-6">
           <div className="flex h-10 w-10 shrink-0 items-center justify-center border border-[var(--ma-border)]">
-            <ShieldCheck size={20} weight="bold" className="text-[var(--ma-accent)]" aria-hidden="true" />
+            <ShieldCheck size={20} weight="bold" className="text-[var(--ma-text)]" aria-hidden="true" />
           </div>
 
           <div className="flex-1 space-y-2 text-sm leading-relaxed text-[var(--ma-text)]">

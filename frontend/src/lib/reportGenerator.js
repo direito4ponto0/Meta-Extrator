@@ -208,7 +208,7 @@ function writeBrand(ctx) {
   doc.setDrawColor(229, 231, 235);
   doc.setLineWidth(0.5);
   doc.line(margin, ctx.y, W - margin, ctx.y);
-  ctx.y += 18;
+  ctx.y += 36;
 }
 
 // ============================================================

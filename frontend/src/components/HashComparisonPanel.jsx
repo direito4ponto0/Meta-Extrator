@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import { ArrowsLeftRight, ArrowLeft, ArrowRight, CheckCircle, XCircle, FileText, Database, UploadSimple } from "@phosphor-icons/react";
+import { ArrowsLeftRight, CheckCircle, XCircle, FileText, Database, UploadSimple } from "@phosphor-icons/react";
 import { hashFileMulti, compareHashes, detectAlgorithmByLength } from "@/lib/hashFile";
 import { downloadComparisonJson, buildComparisonPdfBlob } from "@/lib/reportGenerator";
 import { formatBytes } from "@/lib/formatters";
@@ -144,10 +144,7 @@ export default function HashComparisonPanel() {
               }`}
             >
               <span>Arquivo</span>
-              <span className="inline-flex items-center" aria-hidden="true">
-                <ArrowLeft size={12} weight="bold" />
-                <ArrowRight size={12} weight="bold" className="-ml-0.5" />
-              </span>
+              <ArrowsLeftRight size={14} weight="bold" aria-hidden="true" />
               <span>Arquivo</span>
             </button>
             <button
@@ -161,10 +158,7 @@ export default function HashComparisonPanel() {
               }`}
             >
               <span>Arquivo</span>
-              <span className="inline-flex items-center" aria-hidden="true">
-                <ArrowLeft size={12} weight="bold" />
-                <ArrowRight size={12} weight="bold" className="-ml-0.5" />
-              </span>
+              <ArrowsLeftRight size={14} weight="bold" aria-hidden="true" />
               <span>Hash</span>
             </button>
           </div>

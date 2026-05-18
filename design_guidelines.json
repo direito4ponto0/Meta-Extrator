@@ -1,0 +1,111 @@
+{
+  "theme": "LIGHT",
+  "archetype": "Archetype 4 (Swiss & High-Contrast)",
+  "vibe": "Objective, rigid, functional, forensic",
+  "colors": {
+    "background_base": "#FFFFFF",
+    "background_secondary": "#F3F4F6",
+    "text_primary": "#0A0A0A",
+    "text_secondary": "#525252",
+    "accent_primary": "#002FA7", 
+    "accent_secondary": "#0A0A0A",
+    "success": "#16A34A",
+    "warning": "#F59E0B",
+    "destructive": "#DC2626",
+    "border": "#E5E7EB",
+    "rules": [
+      "Color is Function Only. 95% of the UI should be monochrome.",
+      "Never use pure #000000 or #808080. Tint neutrals with a tiny bit of blue (cool grey) to make them feel alive.",
+      "Interactive states must have explicit high contrast."
+    ]
+  },
+  "typography": {
+    "fonts": {
+      "headings": "Chivo",
+      "body": "IBM Plex Sans",
+      "mono": "IBM Plex Mono"
+    },
+    "hierarchy": {
+      "h1": "text-4xl sm:text-5xl lg:text-6xl tracking-tight leading-none font-black",
+      "h2": "text-2xl sm:text-3xl lg:text-4xl tracking-tight leading-tight font-bold",
+      "h3": "text-xl sm:text-2xl tracking-tight font-semibold",
+      "body": "text-base leading-relaxed",
+      "mono_data": "text-sm font-mono tracking-tight text-gray-800",
+      "overline": "text-xs font-bold uppercase tracking-[0.2em]"
+    }
+  },
+  "spacing_and_layout": {
+    "strategy": "The Control Room Grid",
+    "rules": [
+      "Use Generous Spacing for the hero upload zone (p-12 or p-24).",
+      "Dashboard/Results area should use tight gaps (gap-4 or gap-6) for high data density.",
+      "Optical Alignment over geometrical alignment.",
+      "Containers with borders must have internal padding (p-6 or p-8)."
+    ]
+  },
+  "surfaces": {
+    "strategy": "Grid Borders (The Technical Look)",
+    "rules": [
+      "Expose the skeleton. Use pure HTML + Tailwind CSS for structural grid borders.",
+      "Dashboard Cards: Flat background, 1px subtle border, no shadow.",
+      "Upload Zone: Use 'The Tracing Beam' concept for the drag-and-drop area—a glowing or dashed border that signals activity.",
+      "No glassmorphism for this forensic tool; maintain solid, stark backgrounds to prevent data refraction."
+    ]
+  },
+  "components": {
+    "strategy": "Shadcn/UI heavily customized to remove Vercel-look",
+    "specifics": {
+      "upload_zone": "Massive target area with dashed borders. Custom Framer Motion drag events. Use 'data_bg' image at low opacity inside the dropzone.",
+      "metadata_table": "Dense, monospace font for keys and values. Border-collapse table layout.",
+      "tabs": "Shadcn Tabs for EXIF / Document / Media / Location. Sharp edges, high contrast active state (Black bg, White text).",
+      "buttons": "Sharp corners (rounded-none or max rounded-sm). Hover state must be lighter hue or inverted.",
+      "map_view": "Leaflet.js integration for GPS coordinates. Monochrome map tiles if possible.",
+      "progress_bar": "Shadcn Progress, colored International Klein Blue."
+    }
+  },
+  "motion_and_interactions": {
+    "rules": [
+      "Minimalist animations. Use micro-interactions for feedback (e.g., file drop accepted).",
+      "Staggered entrance for metadata list items.",
+      "Scanning animation over the document icon during hash calculation.",
+      "Respect prefers-reduced-motion."
+    ]
+  },
+  "media_and_icons": {
+    "icons_library": "Phosphor Icons (@phosphor-icons/react)",
+    "images": [
+      {
+        "url": "https://static.prod-images.emergentagent.com/jobs/8da227c1-0e05-4deb-afd3-98c13623bfbc/images/17a919675c0cc63b437d4bbba56d4b123e8dd33df64ae635dc7eafc2f3fd2e20.png",
+        "category": "background",
+        "description": "Abstract network data background to be used as a subtle overlay inside the Drag-and-Drop hero section (opacity-10)."
+      },
+      {
+        "url": "https://static.prod-images.emergentagent.com/jobs/8da227c1-0e05-4deb-afd3-98c13623bfbc/images/52987c050e02fcf7aa4c1b66496439b8333561ebce1c40f04c069a51fdbe5050.png",
+        "category": "illustration",
+        "description": "Privacy and local processing illustration, to be placed in the 'About/How it works' section."
+      }
+    ]
+  },
+  "pages_structure": {
+    "Main_Page": {
+      "Header": "Fixed header with 'META ANALYTICS' logo, '100% Local Processing' badge, and GitHub/Docs links.",
+      "Hero": "Full width. Massive drag-and-drop zone. Support text 'Arraste um arquivo ou clique para selecionar (Até 200GB)'.",
+      "Processing_State": "Replaces upload zone when active. Shows live progress bar and calculating hashes animation.",
+      "Results_Dashboard": {
+        "Hashes_Panel": "Shows MD5, SHA-1, SHA-256 with copy buttons. Uses IBM Plex Mono.",
+        "Metadata_Tabs": "Tabs to switch between categories. Uses dense table layout for Key/Value pairs.",
+        "Location_Panel": "Map view pinpointing GPS data if present in EXIF.",
+        "Actions": "Download PDF Report and Download JSON buttons at the top right of the dashboard."
+      },
+      "About_Section": "Grid bento layout highlighting 'Zero Data Collection', 'Local in Browser', 'All File Types'. Uses privacy illustration.",
+      "Footer": "Minimal technical footer. Dark mode contrast (Dark background, light text) or simple subtle bottom footer."
+    }
+  },
+  "accessibility_and_testing": {
+    "rules": [
+      "All text must meet APCA contrast standards. Minimum 4.5:1 for standard text.",
+      "Every interactive element MUST have a data-testid (e.g., data-testid='upload-dropzone', data-testid='download-pdf-btn').",
+      "Use aria-hidden for purely decorative icons."
+    ]
+  }
+}

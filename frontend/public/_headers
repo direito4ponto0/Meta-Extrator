@@ -1,0 +1,9 @@
+/*
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: no-referrer
+  Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=(), usb=(), magnetometer=(), accelerometer=(), gyroscope=()
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+  Cross-Origin-Opener-Policy: same-origin
+  Cross-Origin-Resource-Policy: same-origin
+  X-DNS-Prefetch-Control: off

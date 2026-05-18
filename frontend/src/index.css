@@ -1,0 +1,126 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import 'leaflet/dist/leaflet.css';
+
+:root {
+  /* Light Theme - Original */
+  --ma-bg: #FFFFFF;
+  --ma-bg-secondary: #F3F4F6;
+  --ma-text: #0A0A0A;
+  --ma-text-secondary: #525252;
+  --ma-accent: #002FA7;
+  --ma-border: #E5E7EB;
+  --ma-success: #16A34A;
+  --ma-warning: #F59E0B;
+  --ma-destructive: #DC2626;
+}
+
+body {
+  margin: 0;
+  font-family: 'Montserrat', system-ui, -apple-system, sans-serif;
+  background-color: var(--ma-bg);
+  color: var(--ma-text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code, .font-mono {
+  font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace !important;
+}
+
+.font-display {
+  font-family: 'Montserrat', sans-serif !important;
+  letter-spacing: -0.02em;
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 4%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 4%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 4%;
+    --primary: 0 0% 4%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 220 14% 96%;
+    --secondary-foreground: 0 0% 4%;
+    --muted: 220 14% 96%;
+    --muted-foreground: 0 0% 32%;
+    --accent: 224 100% 33%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84% 50%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 224 100% 33%;
+    --radius: 0.125rem;
+  }
+}
+
+@layer base {
+  * { @apply border-border; }
+  body { @apply bg-background text-foreground; }
+
+  ::selection {
+    background-color: #002FA7;
+    color: #FFFFFF;
+  }
+}
+
+/* Tracing beam dropzone */
+@keyframes ma-beam {
+  0%, 100% { border-color: var(--ma-border); }
+  50% { border-color: var(--ma-accent); }
+}
+.ma-beam-idle {
+  border: 2px dashed var(--ma-border);
+  transition: all 200ms ease;
+}
+.ma-beam-active {
+  border: 2px dashed var(--ma-accent);
+  background: rgba(0, 47, 167, 0.03);
+  animation: ma-beam 1.6s ease-in-out infinite;
+}
+
+/* Scan animation */
+@keyframes ma-scan {
+  0% { transform: translateY(-100%); opacity: 0; }
+  50% { opacity: 1; }
+  100% { transform: translateY(100%); opacity: 0; }
+}
+.ma-scan-line {
+  position: absolute;
+  inset-inline: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--ma-accent), transparent);
+  animation: ma-scan 2.2s ease-in-out infinite;
+}
+
+/* Stagger fade in */
+@keyframes ma-fadeup {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.ma-fadeup { animation: ma-fadeup 360ms ease forwards; }
+
+/* Leaflet override - monochrome look */
+.leaflet-container {
+  font-family: 'IBM Plex Sans', sans-serif;
+  background: #F3F4F6;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: #F3F4F6; }
+::-webkit-scrollbar-thumb { background: #C7CDD4; border: 2px solid #F3F4F6; }
+::-webkit-scrollbar-thumb:hover { background: #525252; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

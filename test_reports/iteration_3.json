@@ -1,0 +1,25 @@
+{
+  "summary": "Frontend-only e2e verification of META EXTRATOR layout overhaul and the new PDF report format. All 24 scenarios passed: hero h1 with lowercase trailing 's', ArrowsLeftRight icon on compare tab and About hash-modules block (no scales/balance), subtle grid background (opacity 0.025) and top accent line on active tab, FileDropBox in Signature + Comparison (with working drag-and-drop), comparison mode switch clears files, all download filenames prefixed 'Relatorio-Meta-Extrator_<op>_*' (assinatura/comparacao_<verdict>/extracao), JSONs include 'gerado_em' ISO timestamp, extraction PDF contains brand 'META EXTRATOR' and section '5. Tecnologias e bibliotecas utilizadas', HashesPanel shows 'integridade' (not 'cadeia de custódia'), and 'cadeia de custódia' is absent everywhere (AboutSection and PDF bytes).",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": ["/app/test_reports/iteration_3.json"],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "Minor: FileDropBox uses uncontrolled <input type='file'> with a ref + an `inputId` prop — duplicate references. The 'Selecionar' button clicks via the ref, but consumers also pass inputId (only used as id on the input). Not a bug, just slight redundancy.",
+    "Minor: HashComparisonPanel resets fileA/fileB/result on mode switch (good), but the internal `expectedHash` textarea state is not exposed via data-testid for the 'cleared' check on mode switch back. Not a defect.",
+    "Optional: reportGenerator.js is ~630 lines and centralizes 5 report types. Consider splitting per-operation generators into /lib/reports/*.js to stay below the 700-line guideline if more report types are added.",
+    "Optional: Pre-existing console warnings remain unrelated to this iteration — CSP 'frame-ancestors' delivered via <meta> is ignored by browsers; move CSP to HTTP header to silence."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "n/a (no backend)", "frontend": "100% (24/24)"},
+  "test_credentials": "n/a",
+  "seed_data_creation": "Playwright-uploaded in-memory files: hello.txt=b'hello world', AAA.txt=b'AAA', identical pair 'same content', and a 1x1 PNG decoded from base64 for the extraction flow. Drag/drop event dispatched programmatically with DataTransfer (file 'dragged.txt').",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Layout overhaul verified end-to-end against https://github-project-mod-1.preview.emergentagent.com. Key verifications: (1) h1 ends with 'HASHs' rendered via <span class='lowercase'>s</span>; (2) compare tab + AboutSection hashModules use phosphor ArrowsLeftRight (no 'scales'/'balance' substrings in SVG); (3) signature drag-and-drop replaces the file (confirmed dropbox innerText shows the dropped filename); (4) switching from file-file to file-hash clears the file (cmp-file-single-dropbox shows 'Arraste'); (5) downloaded PDFs (sig 10457 bytes, extraction ~10-15KB) contain bytes 'META EXTRATOR' and 'Tecnolog'/'5.'; (6) JSON downloads include 'gerado_em' ISO timestamps. No 'cadeia de cust' substring anywhere in /app/frontend/src or in the generated PDF bytes. PDFs include footer text on every page and a faint watermark (verified visually via newPdfDoc/drawWatermark GState path).",
+  "rca_of_the_issue": "n/a — no bugs found in this iteration."
+}

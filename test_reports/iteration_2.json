@@ -1,0 +1,34 @@
+{
+  "summary": "Frontend-only e2e test of Meta Extrator hash modules (Signature + Comparison) plus tab navigation and updated hero/AboutSection. All requested features verified end-to-end against the production preview URL using Playwright. 100% of test scenarios passed.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {
+        "screen": "AboutSection (visible on all 3 tabs)",
+        "issues": [
+          "Hero illustration image <img src='https://static.prod-images.emergentagent.com/jobs/.../52987c050e02fcf7aa4c1b66496439b8333561ebce1c40f04c069a51fdbe5050.png'> is blocked by the page CSP (img-src 'self' data: blob: https://*.tile.openstreetmap.org https://unpkg.com). The image renders as a broken icon. Either host it locally under /public, inline as data:, or extend CSP img-src to include the emergentagent.com domain."
+        ]
+      }
+    ]
+  },
+  "test_report_links": ["/app/test_reports/iteration_2.json"],
+  "action_items": [
+    "Optional: fix AboutSection illustration by hosting locally (/public) or adding the emergentagent.com host to the CSP img-src directive (CSP is set via <meta>; check public/index.html)."
+  ],
+  "critical_code_review_comments": [
+    "HashComparisonPanel: in 'file-hash' mode the file picker uses setFileA, the SAME state that file-file mode uses. Switching modes preserves the previously picked file (potentially confusing to users). Consider resetting fileA/fileB on mode change.",
+    "Home.jsx: switchTab calls reset() for non-extract tabs, but Signature/Comparison panels keep their own internal state across tab switches (selected algorithms, files, result). This is acceptable but worth documenting.",
+    "AboutSection.jsx is ~225 lines and renders the same heavy block on every tab — consider extracting the 'Tecnologias' subsection into its own component to keep file under 700 line guideline and reduce re-renders.",
+    "CSP via <meta> includes 'frame-ancestors' which is ignored by browsers when delivered via meta (console warning). Move to HTTP header or remove the directive to keep the console clean."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "n/a (no backend)", "frontend": "100%"},
+  "test_credentials": "n/a",
+  "seed_data_creation": "In-browser File objects created via Playwright set_input_files: 'hello.txt' = b'hello world' (SHA-256 b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9), and identical pair 'a.txt'/'b.txt' = b'the quick brown fox'.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "All requested features work: hero text 'EXTRAÇÃO e MANIPULAÇÃO ONLINE DE METADADOS E HASHs', free-badge, 3 tabs (tab-extract default + tab-signature + tab-compare with black active background), 8 algorithm toggles in Signature module (md5, sha1, sha256, sha384, sha512, sha3-256, sha3-512, blake3), SHA-256 of 'hello world' verified bit-exact, both sig-pdf-btn and sig-json-btn trigger downloads (meta-extrator_assinatura_hello.pdf/.json). Comparison module: file-file identical => 'Arquivos idênticos' verdict with green border; file-hash with correct SHA-256 => 'Hash válido (SHA256)' with green border; wrong hash => 'Hash não corresponde' with red border. cmp-pdf-btn/cmp-json-btn downloads work. AboutSection includes hash-modules-block with both cards. Only console errors are CSP-related (Cloudflare beacon, frame-ancestors meta, and the AboutSection image — see design_issues).",
+  "rca_of_the_issue": "No bugs; only one minor design issue. RCA for AboutSection broken image: the <meta http-equiv='Content-Security-Policy'> in public/index.html restricts img-src to 'self', data:, blob:, openstreetmap tiles and unpkg. The illustration is hosted on static.prod-images.emergentagent.com which is NOT whitelisted, so the browser blocks the request. Mitigation: download the image to /app/frontend/public and reference it as a relative path, OR add 'https://static.prod-images.emergentagent.com' to the CSP img-src directive."
+}
